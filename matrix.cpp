@@ -54,7 +54,9 @@ size_t Matrix::GetWidth() const
 		return data_[0].size();
 	}
 	else
-		return -1;
+  {
+   return -1
+  };
 		
 }
 
@@ -71,6 +73,10 @@ void Matrix::SetValue(const size_t height_index, const size_t width_index,
 
 Matrix Matrix::Transpose() const
 {
+  if (data_[0].size() == 0 && data_.size() == 0)
+  {
+    return Matrix;
+  }
 	Matrix trans(data_[0].size(), data_.size());
 	
 	for (size_t i = 0; i < trans.GetWidth(); i++)
@@ -88,12 +94,12 @@ Matrix Matrix::operator*(const Matrix& rhs)
 	if (data_[0].size() != rhs.GetHeight())
 	{
 		std::cout << "You cannot multiple these matrixes!";
-		Matrix mn(0, 0);
-		return mn;
+		Matrix composition(0, 0);
+		return composition;
 	}
-	Matrix mn(GetHeight(), rhs.GetWidth());
+	Matrix composition(GetHeight(), rhs.GetWidth());
 
-	int x = 0;
+	int sum_elem = 0;
 
 	for (size_t i = 0; i < data_.size(); i++)
 	{
@@ -101,14 +107,14 @@ Matrix Matrix::operator*(const Matrix& rhs)
 		{
 			for (size_t k = 0; k < data_[0].size(); k++)
 			{
-				x = x + data_[i][k] * rhs.GetValue(k, j);
+				sum_elem = sum_elem + data_[i][k] * rhs.GetValue(k, j);
 			}
-			mn.SetValue(i, j, x);
-			x = 0;
+			composition.SetValue(i, j, sum_elem);
+			sum_elem = 0;
 		}
 	
 	}
 
-	return mn;
+	return composition;
 
 }
