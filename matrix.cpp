@@ -77,16 +77,19 @@ Matrix Matrix::Transpose() const
   {
     return Matrix;
   }
-	Matrix trans(data_[0].size(), data_.size());
+  else
+  {
+    Matrix trans(data_[0].size(), data_.size());
 	
-	for (size_t i = 0; i < trans.GetWidth(); i++)
+    for (size_t i = 0; i < trans.GetWidth(); i++)
+    {
+	for (size_t j = 0; j < trans.GetHeight(); j++)
 	{
-		for (size_t j = 0; j < trans.GetHeight(); j++)
-		{
-			trans.SetValue(j, i, data_[i][j]);
-		}
+		trans.SetValue(j, i, data_[i][j]);
 	}
-	return trans;
+     }
+     return trans;
+  }
 }
 
 Matrix Matrix::operator*(const Matrix& rhs)
