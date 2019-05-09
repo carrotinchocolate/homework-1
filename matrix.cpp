@@ -1,4 +1,4 @@
-﻿#include "matrix.h"
+#include "matrix.h"
 
 
 
@@ -18,15 +18,15 @@ std::istream& operator>>(std::istream& input_stream, Matrix& matrix)
 
 std::ostream& operator<<(std::ostream& output_stream, const Matrix& matrix)
 {
-	for (size_t y = 0; y < matrix.GetHeight(); y++)
-	{	
-		for (size_t x = 0; x < matrix.GetWidth(); x++)
-		{
-			output_stream << matrix.GetValue(y, x) << " ";
-		}
-		output_stream << "\n";
+    for (size_t y = 0; y < matrix.GetHeight(); y++)
+    {	
+	for (size_t x = 0; x < matrix.GetWidth(); x++)
+	{
+		output_stream << matrix.GetValue(y, x) << " ";
 	}
-	return output_stream;
+	output_stream << "\n";
+    }
+    return output_stream;
 }
 
 Matrix::Matrix(const size_t height_index, const size_t width_index)
@@ -54,9 +54,9 @@ size_t Matrix::GetWidth() const
 		return data_[0].size();
 	}
 	else
-  {
-   return -1
-  };
+  	{
+    		return -1;
+  	}
 		
 }
 
@@ -73,23 +73,20 @@ void Matrix::SetValue(const size_t height_index, const size_t width_index,
 
 Matrix Matrix::Transpose() const
 {
-  if (data_[0].size() == 0 && data_.size() == 0)
-  {
-    return Matrix;
-  }
-  else
-  {
-    Matrix trans(data_[0].size(), data_.size());
+	if (data_[0].size() == 0 && data_.size() == 0)
+        {
+            return Matrix;
+        }
+        Matrix trans(data_[0].size(), data_.size());
 	
-    for (size_t i = 0; i < trans.GetWidth(); i++)
-    {
-	for (size_t j = 0; j < trans.GetHeight(); j++)
+	for (size_t i = 0; i < trans.GetWidth(); i++)
 	{
-		trans.SetValue(j, i, data_[i][j]);
+		for (size_t j = 0; j < trans.GetHeight(); j++)
+		{
+			trans.SetValue(j, i, data_[i][j]);
+		}
 	}
-     }
-     return trans;
-  }
+	return trans;
 }
 
 Matrix Matrix::operator*(const Matrix& rhs)
