@@ -75,7 +75,7 @@ Matrix Matrix::Transpose() const
 {
 	if (data_[0].size() == 0 && data_.size() == 0)
         {
-            return Matrix;
+            return Matrix(0,0);
         }
         Matrix trans(data_[0].size(), data_.size());
 	
